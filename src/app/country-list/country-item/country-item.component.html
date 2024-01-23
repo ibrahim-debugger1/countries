@@ -1,0 +1,7 @@
+<div class="container pop-up-element" [class.dark]="mode">
+  <img [src]="item['flags']['png']" />
+  <div class="text" [class.dark]="mode">{{ this.item["name"]["common"] }}</div>
+  <div class="text" [class.dark]="mode">population: {{ this.item["population"] }}</div>
+  <div class="text" [class.dark]="mode">Region: {{ this.item["region"] }}</div>
+  <div class="text" [class.dark]="mode">Capital: {{ this.item["capital"] }}</div>
+</div>

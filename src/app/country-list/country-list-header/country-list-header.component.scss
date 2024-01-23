@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 2% 2% 0 2%;
+  padding: 0.4% 0;
+}
+
+.custom-dropdown {
+  padding: 0.3%;
+  font-size: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  outline: none;
+  width: 25vw;
+  height: 5vh;
+}
+
+/* Style for dropdown options */
+.custom-dropdown option {
+  padding: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+}
+
+.input {
+  width: 23%;
+  height: 25%;
+  // margin: 0 60px;
+}
+.custom-dropdown .dark-mode {
+  background-color: #1a1a1a; /* Dark gray background */
+  color: white;
+}
+
+.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
+  border: 1px solid white;
+  height: 53px;
+  margin: 0 73px 22px 51px;
+}
+
+.dark {
+  background-color: #1a1a1a;
+  color: white;
+  outline: none;
+  box-shadow: none;
+}
+
+
+ input.dark {
+  color: #fff !important; /* Set the font color to white */
+}

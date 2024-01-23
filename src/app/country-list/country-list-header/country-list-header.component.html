@@ -1,0 +1,18 @@
+<div class="container">
+  <mat-form-field  class="input" [class.dark-mode]="mode"  appearance="outline">
+    <mat-label [class.dark]="mode">search about a country</mat-label>
+    <input matInput [(ngModel)]="searchText" (ngModelChange)="onSearch()" [class.dark]="mode" />
+  </mat-form-field>
+  <div class="continents">
+    <select [(ngModel)]="selectedValue" (change)="onDropdownChange()" class="custom-dropdown" [class.dark]="mode">
+      <option [class.dark-mode]="mode" value="All" selected>All</option>
+      <option [class.dark-mode]="mode" value="Asia">Asia</option>
+      <option [class.dark-mode]="mode" value="Africa">Africa</option>
+      <option [class.dark-mode]="mode" value="Americas">Americas</option>
+      <option [class.dark-mode]="mode" value="Antarctic">Antarctic</option>
+      <option [class.dark-mode]="mode" value="Europe">Europe</option>
+      <option [class.dark-mode]="mode" value="Oceania">Oceania</option>
+
+    </select>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="container" [class.dark]="this.mode">
+  <div class="site-name">where in the world?</div>
+  <div class="mode">
+    <img src="../../assets/moon-regular.svg" *ngIf="!this.mode" />
+    <div class="light-pic">
+      <img
+        src="../../assets/light-mode.png"
+        *ngIf="this.mode"
+      />
+    </div>
+    <div *ngIf="!mode" (click)="changeMode()">Dark Mode</div>
+    <div *ngIf="mode" (click)="changeMode()">Light Mode</div>
+  </div>
+</div>

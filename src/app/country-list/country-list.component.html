@@ -1,0 +1,11 @@
+<div class="container">
+  <app-country-list-header [mode]="mode"></app-country-list-header>
+  <div class="items">
+    <app-country-item
+      *ngFor="let item of countries"
+      [item]="item"
+      [mode]="this.mode"
+    ></app-country-item>
+  </div>
+  <app-pagination [mode]="mode"></app-pagination>
+</div>

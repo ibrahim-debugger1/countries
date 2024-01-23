@@ -1,0 +1,33 @@
+.contanier {
+  height: 6vh;
+}
+
+.mat-paginator {
+  background-color: inherit;
+  color: rgb(0, 0, 0)   ;
+}
+
+.dark {
+  background-color: inherit;
+  color: white !important;
+}
+
+button.mat-paginator-navigation {
+  color: #ffffff !important; /* Replace with your desired color */
+}
+
+/* Change the color of the active page number */
+.mat-paginator-page-size {
+  color: #ffffff !important; /* Replace with your desired color */
+}
+@media only screen and (max-width: 1100px) {
+  .contanier {
+    height: 6vh;
+    width: 600px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+}
