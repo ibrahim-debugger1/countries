@@ -3,6 +3,8 @@ import { Observable, count } from 'rxjs';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
+import { Country } from './country';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -17,29 +19,37 @@ export class SharedDataService {
   private countriesLength = new Subject<{}>();
   countrySliceUpdated$ = this.countrySliceSource.asObservable();
   apiUrl = 'https://restcountries.com/v3.1/all';
-  private allCountriesData: any[] = [];
-  private slicedCountryData: any[] = [];
-  private specificContinentData: any[] = [];
-  private filterd: boolean = false;
+  private allCountriesData: Country[] = [];
+  private slicedCountryData: Country[] = [];
+  private specificContinentDataOrAllContinent: Country[] = [];
   private arrayLength: number = 0;
 
   constructor(public router: Router, public http: HttpClient) {}
 
-  getAllCountries(): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}`);
+  getAllCountries(): Observable<Country[]> {
+    return this.http.get<Country[]>(`${this.apiUrl}`).pipe(
+      map((data: any[]) =>
+        data.map((item) => ({
+          pic: item['flags']['png'],
+          name: item['name']['common'],
+          population: item['population'],
+          region: item['region'],
+          capital: item['capital'],
+        }))
+      )
+    );
   }
 
-  saveAllCountriesData(data: any[]): void {
-    data = data.filter((item) => item['name']['common'] != 'Israel');
-    console.log(data[0]);
+  saveAllCountriesData(data: Country[]): void {
+    data = data.filter((item) => item['name'] != 'Israel');
     this.allCountriesData = data;
-    this.specificContinentData = data;
+    this.specificContinentDataOrAllContinent = data;
     this.slicedCountryData = data.slice(0, 8);
   }
 
   setCountrySlice(startIndex: number, endIndex: number): void {
-    this.arrayLength = this.specificContinentData.length;
-    this.slicedCountryData = this.specificContinentData.slice(
+    this.arrayLength = this.specificContinentDataOrAllContinent.length;
+    this.slicedCountryData = this.specificContinentDataOrAllContinent.slice(
       startIndex,
       endIndex
     );
@@ -52,39 +62,37 @@ export class SharedDataService {
   }
 
   filterOnRegion(continent: string) {
-    let specificContinent: any[] = [];
+    let specificContinent: Country[] = [];
     if (continent == 'All') {
-      this.specificContinentData = this.allCountriesData;
+      this.specificContinentDataOrAllContinent = this.allCountriesData;
     } else {
       this.allCountriesData.forEach((item) => {
         if (item['region'] == continent) specificContinent.push(item);
       });
-      this.specificContinentData = specificContinent;
-      // console.log(this.specificContinentData)
+      this.specificContinentDataOrAllContinent = specificContinent;
+      // console.log(this.specificContinentDataOrAllContinent)
     }
     this.setCountrySlice(0, 8);
     this.countryFilter.next({});
   }
   filterOnSearch(country: string) {
-    let specificCountryInThatContinent: any[] = [];
+    let specificCountryInThatContinent: Country[] = [];
     let searchedLength = country.length;
     if (
       country &&
       country.toLowerCase() == 'israel'.substring(0, searchedLength)
     )
       specificCountryInThatContinent.push(
-        this.allCountriesData.filter(
-          (item) => item['name']['common'] == 'Palestine'
-        )[0]
+        this.allCountriesData.filter((item) => item['name'] == 'Palestine')[0]
       );
-    this.specificContinentData.forEach((item) => {
+    this.specificContinentDataOrAllContinent.forEach((item) => {
       if (
-        item['name']['common'].substring(0, searchedLength).toLowerCase() ==
+        item['name'].substring(0, searchedLength).toLowerCase() ==
         country.toLowerCase()
       )
         specificCountryInThatContinent.push(item);
     });
-    this.specificContinentData = specificCountryInThatContinent;
+    this.specificContinentDataOrAllContinent = specificCountryInThatContinent;
     this.setCountrySlice(0, 8);
     this.countryFilter.next({});
   }

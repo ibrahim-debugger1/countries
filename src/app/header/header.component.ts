@@ -7,7 +7,7 @@ import { Component, Output,EventEmitter } from '@angular/core';
 })
 export class HeaderComponent {
   mode : boolean = false;
-  @Output() toggleMode = new EventEmitter<any>();
+  @Output() toggleMode = new EventEmitter<boolean>();
 
   constructor(){}
 

@@ -9,7 +9,6 @@ import { MatPaginator } from '@angular/material/paginator';
 })
 export class CountryListHeaderComponent {
   @Input() mode!: boolean;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   selectedValue: string = 'All';
   searchText: string = '';
   constructor(private sharedDataService: SharedDataService){}

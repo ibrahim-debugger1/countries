@@ -1,4 +1,5 @@
 import { Component, Input} from '@angular/core';
+import { Country } from 'src/app/country';
 
 @Component({
   selector: 'app-country-item',
@@ -6,7 +7,7 @@ import { Component, Input} from '@angular/core';
   styleUrls: ['./country-item.component.scss']
 })
 export class CountryItemComponent {
-  @Input() item!: any;
+  @Input() item!: Country;
   @Input() mode!: boolean;
   ngOnInit(){
 }
