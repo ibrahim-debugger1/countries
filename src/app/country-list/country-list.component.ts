@@ -15,8 +15,16 @@ export class CountryListComponent {
     private sharedDataService: SharedDataService,
     public router: Router
   ) {}
-  ngOnInit() {
 
+  /**
+   * fetching the list of all countries using the
+   * 'getAllCountries' method. Additionally, the component subscribes to the
+   * 'countrySliceUpdated$' observable from the 'sharedDataService' to get the
+   * sliced data to send it to the country-item component.
+   *
+   * @returns {void}
+   **/
+  ngOnInit() {
     this.getAllCountries();
     this.sharedDataService.countrySliceUpdated$.subscribe(
       ({ startIndex, endIndex }) => {
@@ -25,12 +33,28 @@ export class CountryListComponent {
     );
   }
 
+  /**
+   * Fetches the list of all countries from the shared data service.
+   *
+   * This method calls the 'getAllCountries' method from the 'sharedDataService'
+   * and subscribes to the returned observable. Upon receiving the data, it updates
+   * the component's 'countries' property with the first 8 items and saves the entire
+   * country data using the 'saveAllCountriesData' method of the 'sharedDataService'.
+   *
+   * @returns {void}
+   **/
   getAllCountries() {
     this.sharedDataService.getAllCountries().subscribe((data) => {
       this.countries = data.slice(0, 8);
       this.sharedDataService.saveAllCountriesData(data);
     });
   }
+
+  /**
+   * Updates the component's 'countries' property with the currently sliced country data.
+   *
+   * @returns {void}
+   **/
   updateData() {
     this.countries = this.sharedDataService.getSlicedArray();
   }
