@@ -16,7 +16,6 @@ export class SharedDataService {
   }>();
   countryFilter = new Subject<{}>();
   countryFilters$ = this.countryFilter.asObservable();
-  countriesLength = new Subject<{}>();
   countrySliceUpdated$ = this.countrySliceSource.asObservable();
   apiUrl = 'https://restcountries.com/v3.1/all';
   allCountriesData: Country[] = [];
@@ -84,7 +83,6 @@ export class SharedDataService {
       endIndex
     );
     this.countrySliceSource.next({ startIndex, endIndex });
-    this.countriesLength.next({});
   }
   /**
    * Retrieves the currently sliced country data.

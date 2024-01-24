@@ -4,7 +4,6 @@ import { SharedDataService } from './shared-data.service';
 import { Router } from '@angular/router';
 import { PaginationComponent } from './country-list/pagination/pagination.component';
 import { CountryListComponent } from './country-list/country-list.component';
-import { CountryListHeaderComponent } from './country-list/country-list-header/country-list-header.component';
 
 describe('SharedDataService', () => {
   let service: SharedDataService;
@@ -103,6 +102,19 @@ describe('SharedDataService', () => {
         mockData.slice(startIndex, endIndex)
       );
     });
+    it('should notify observers when setCountrySlice is called', () => {
+      const observerSpy = jasmine.createSpyObj('Observer', ['next']);
+      service.countrySliceSource.subscribe(observerSpy);
+
+      // Call the method you want to test
+      service.setCountrySlice(0, 5);
+
+      // Expect that the observable was notified with the correct parameters
+      expect(observerSpy.next).toHaveBeenCalledWith({
+        startIndex: 0,
+        endIndex: 5,
+      });
+    });
   });
 
   describe('getSlicedArray', () => {
@@ -187,14 +199,19 @@ describe('SharedDataService', () => {
         mockAllCountriesData
       );
     });
+    it('should update countryFilter observable when calling filterOnRegion', () => {
+      const continent = 'All';
+      const countryFilterSpy = spyOn(service.countryFilter, 'next');
+
+      //Act
+      service.filterOnRegion(continent);
+
+      // Assert
+      expect(countryFilterSpy).toHaveBeenCalled();
+    });
   });
 
   describe('filterOnSearch', () => {
-    let component: CountryListHeaderComponent;
-
-    beforeEach(() => {
-      component = new CountryListHeaderComponent(service);
-    });
     it('should filter countries based on the provided search term', () => {
       service.allCountriesData = mockData;
       let searchTerm = 'Israel'; // Case-insensitive search term
@@ -243,6 +260,16 @@ describe('SharedDataService', () => {
           capital: 'Capital City',
         },
       ]);
+    });
+    it('should update countryFilter observable when calling filterOnSearch', () => {
+      const continent = 'Palestine';
+      const countryFilterSpy = spyOn(service.countryFilter, 'next');
+
+      //Act
+      service.filterOnSearch(continent);
+
+      // Assert
+      expect(countryFilterSpy).toHaveBeenCalled();
     });
   });
 });

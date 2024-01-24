@@ -1,21 +1,20 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HeaderComponent } from "./header.component";
 
-import { HeaderComponent } from './header.component';
 
-describe('HeaderComponent', () => {
+describe('CountryListComponent', () => {
   let component: HeaderComponent;
-  let fixture: ComponentFixture<HeaderComponent>;
-
   beforeEach(() => {
-    TestBed.configureTestingModule({
-      declarations: [HeaderComponent]
-    });
-    fixture = TestBed.createComponent(HeaderComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    component = new HeaderComponent();
   });
+  it('should emit toggleMode event and toggle mode property', () => {
+    // Arrange
+    const emitSpy = spyOn(component.toggleMode, 'emit');
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+    // Act
+    component.changeMode();
+
+    // Assert
+    expect(emitSpy).toHaveBeenCalled();
+    expect(component.mode).toBe(true); // Assuming initial mode is false, toggle to true
   });
 });

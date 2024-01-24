@@ -45,7 +45,7 @@ export class CountryListComponent {
    **/
   getAllCountries() {
     this.sharedDataService.getAllCountries().subscribe((data) => {
-      this.countries = data.slice(0, 8);
+      this.countries = data.slice(0, Math.min(data.length, 8));
       this.sharedDataService.saveAllCountriesData(data);
     });
   }
