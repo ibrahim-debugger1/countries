@@ -1,0 +1,30 @@
+.container {
+  border-bottom: 1px solid black;
+  display: flex;
+  font-family: sans-serif;
+  font-size: 30px;
+  justify-content: space-between;
+  padding: 17px;
+}
+
+.mode {
+  cursor: pointer;
+  display: flex;
+  margin-right: 20px;
+}
+
+img {
+  height: 35px;
+  padding-right: 10px;
+  width: 35px;
+
+}
+
+.dark {
+  background-color: #000000; /* Slightly darker background for dark mode */
+  color: white;
+}
+
+.light-pic {
+  background-color: #000000; /* Slightly darker background for dark mode */
+}

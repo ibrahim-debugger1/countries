@@ -1,0 +1,10 @@
+<div class="contanier">
+  <mat-paginator
+    [class.dark]="mode"
+    [length]="length || 250"
+    [pageSize]="8"
+    [pageSizeOptions]="[4, 6, 8]"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>
