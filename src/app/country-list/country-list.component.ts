@@ -58,4 +58,6 @@ export class CountryListComponent {
   updateData() {
     this.countries = this.sharedDataService.getSlicedArray();
   }
+
 }
+

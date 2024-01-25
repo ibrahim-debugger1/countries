@@ -3,6 +3,7 @@ import { SharedDataService } from '../shared-data.service';
 import { Router } from '@angular/router';
 import { Country } from '../country';
 import { of } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('CountryListComponent', () => {
   let component: CountryListComponent;
@@ -14,6 +15,7 @@ describe('CountryListComponent', () => {
       population: 555,
       region: 'Middle East',
       capital: '###',
+      url: '#######'
     },
     {
       pic: 'url-to-flag',
@@ -21,6 +23,7 @@ describe('CountryListComponent', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######'
     },
     {
       pic: 'url-to-flag',
@@ -28,6 +31,7 @@ describe('CountryListComponent', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######'
     },
     {
       pic: 'url-to-flag',
@@ -35,6 +39,7 @@ describe('CountryListComponent', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######'
     },
     {
       pic: 'url-to-flag',
@@ -42,13 +47,17 @@ describe('CountryListComponent', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######'
     },
   ];
 
 
   beforeEach(() => {
-    sharedDataService = new SharedDataService({} as Router, {} as any);
-    component = new CountryListComponent(sharedDataService, {} as Router);
+    sharedDataService = new SharedDataService(
+      {} as Router,
+      {} as any,
+      {} as MatDialog
+    );    component = new CountryListComponent(sharedDataService, {} as Router);
   });
 
   it('should call getAllCountries and subscribe to countrySliceUpdated$', () => {

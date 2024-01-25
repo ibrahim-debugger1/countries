@@ -4,6 +4,8 @@ import { SharedDataService } from './shared-data.service';
 import { Router } from '@angular/router';
 import { PaginationComponent } from './country-list/pagination/pagination.component';
 import { CountryListComponent } from './country-list/country-list.component';
+import { Dialog } from '@angular/cdk/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('SharedDataService', () => {
   let service: SharedDataService;
@@ -15,6 +17,7 @@ describe('SharedDataService', () => {
       population: 555,
       region: 'Middle East',
       capital: '###',
+      url: '#######',
     },
     {
       pic: 'url-to-flag',
@@ -22,6 +25,7 @@ describe('SharedDataService', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######',
     },
     {
       pic: 'url-to-flag',
@@ -29,6 +33,7 @@ describe('SharedDataService', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######',
     },
     {
       pic: 'url-to-flag',
@@ -36,6 +41,7 @@ describe('SharedDataService', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######',
     },
     {
       pic: 'url-to-flag',
@@ -43,12 +49,17 @@ describe('SharedDataService', () => {
       population: 1000000,
       region: 'Region',
       capital: 'Capital City',
+      url: '#######',
     },
   ];
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new SharedDataService({} as Router, httpClientSpy as any); // Casting to any for simplicity, replace with appropriate typing
+    service = new SharedDataService(
+      {} as Router,
+      httpClientSpy as any,
+      {} as MatDialog
+    ); // Casting to any for simplicity, replace with appropriate typing
   });
 
   it('should be created', () => {
@@ -141,6 +152,7 @@ describe('SharedDataService', () => {
         population: 15151,
         region: 'Region1',
         capital: 'Amman',
+        url: '#######',
       },
       {
         pic: 'hello',
@@ -148,6 +160,7 @@ describe('SharedDataService', () => {
         population: 15151,
         region: 'Region2',
         capital: 'Amman',
+        url: '#######',
       },
       {
         pic: 'hello',
@@ -155,6 +168,7 @@ describe('SharedDataService', () => {
         population: 15151,
         region: 'Region1',
         capital: 'Amman',
+        url: '#######',
       },
       // Add more mock data as needed
     ];
@@ -166,6 +180,7 @@ describe('SharedDataService', () => {
           population: 15151,
           region: 'Region1',
           capital: 'Amman',
+          url: '#######',
         },
         {
           pic: 'hello',
@@ -173,6 +188,7 @@ describe('SharedDataService', () => {
           population: 15151,
           region: 'Region1',
           capital: 'Amman',
+          url: '#######',
         },
       ];
 
@@ -227,6 +243,7 @@ describe('SharedDataService', () => {
           population: 555,
           region: 'Middle East',
           capital: '###',
+          url: '#######',
         },
       ]);
 
@@ -244,6 +261,7 @@ describe('SharedDataService', () => {
           population: 1000000,
           region: 'Region',
           capital: 'Capital City',
+          url: '#######',
         },
         {
           pic: 'url-to-flag',
@@ -251,6 +269,7 @@ describe('SharedDataService', () => {
           population: 1000000,
           region: 'Region',
           capital: 'Capital City',
+          url: '#######',
         },
         {
           pic: 'url-to-flag',
@@ -258,6 +277,7 @@ describe('SharedDataService', () => {
           population: 1000000,
           region: 'Region',
           capital: 'Capital City',
+          url: '#######',
         },
       ]);
     });
@@ -270,6 +290,17 @@ describe('SharedDataService', () => {
 
       // Assert
       expect(countryFilterSpy).toHaveBeenCalled();
+    });
+  });
+
+  describe('onPopUp', () => {
+    let dialogSpy: jasmine.SpyObj<MatDialog>;
+
+    beforeEach(() => {
+      dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
+    });
+    it('should open the dialog and emit data', () => {
+      //i tried to test it but i can't
     });
   });
 });

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Country } from 'src/app/country';
+import { SharedDataService } from 'src/app/shared-data.service';
 
 @Component({
   selector: 'app-country-item',
@@ -9,5 +10,8 @@ import { Country } from 'src/app/country';
 export class CountryItemComponent {
   @Input() item!: Country;
   @Input() mode!: boolean;
-  ngOnInit() {}
+  constructor(private sharedDataService: SharedDataService){}
+  openPopup() {
+    this.sharedDataService.openPopup(this.item, this.mode);
+  }
 }

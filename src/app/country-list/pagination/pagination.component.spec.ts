@@ -2,13 +2,14 @@ import { PaginationComponent } from './pagination.component';
 import { SharedDataService } from 'src/app/shared-data.service';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('pagination', () => {
   let component: PaginationComponent;
   let sharedDataService: SharedDataService;
 
   beforeEach(() => {
-    sharedDataService = new SharedDataService({} as Router, {} as any);
+    sharedDataService = new SharedDataService({} as Router, {} as any,{} as MatDialog);
     component = new PaginationComponent(sharedDataService);
   });
 

@@ -1,0 +1,8 @@
+<div class="container pop-up-element" [class.dark]="mode">
+  <img [src]="this.item['pic']" />
+  <a [class.dark]="mode" [href]="this.item.url" target="_blank">Google Maps Link</a>
+  <div [class.dark]="mode" class="text">{{ this.item["name"] }}</div>
+  <div [class.dark]="mode" class="text">population: {{ this.item["population"] }}</div>
+  <div [class.dark]="mode" class="text">Region: {{ this.item["region"] }}</div>
+  <div [class.dark]="mode" class="text">Capital: {{ this.item["capital"] }}</div>
+</div>

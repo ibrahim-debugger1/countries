@@ -5,7 +5,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { Country } from './country';
 import { map } from 'rxjs/operators';
-
+import { MatDialog } from '@angular/material/dialog';
+import { BehaviorSubject } from 'rxjs';
+import { PopUpCountryItemComponent } from './country-list/country-item/pop-up-country-item/pop-up-country-item.component';
 @Injectable({
   providedIn: 'root',
 })
@@ -22,8 +24,20 @@ export class SharedDataService {
   slicedCountryData: Country[] = [];
   specificContinentDataOrAllContinent: Country[] = [];
   arrayLength: number = 0;
+  dataSubject = new BehaviorSubject<{
+    data: Country;
+    mode: boolean;
+  }>({
+    data: this.slicedCountryData[0], // Replace with your default data
+    mode: false, // Replace with your default mode value
+  });
+  data$ = this.dataSubject.asObservable();
 
-  constructor(public router: Router, public http: HttpClient) {}
+  constructor(
+    public router: Router,
+    public http: HttpClient,
+    private dialog: MatDialog
+  ) {}
   /**
    * Retrieves a list of countries from a remote server.
    * This function performs an HTTP GET request to the specified API endpoint,
@@ -42,6 +56,7 @@ export class SharedDataService {
           population: item['population'],
           region: item['region'],
           capital: item['capital'],
+          url: item['maps']['googleMaps'],
         }))
       )
     );
@@ -154,5 +169,9 @@ export class SharedDataService {
    **/
   getArraySize() {
     return this.arrayLength;
+  }
+  openPopup(data: Country, mode: boolean) {
+    this.dataSubject.next({ data, mode });
+    this.dialog.open(PopUpCountryItemComponent);
   }
 }

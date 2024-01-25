@@ -15,7 +15,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { PopUpCountryItemComponent } from './country-list/country-item/pop-up-country-item/pop-up-country-item.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CountryListComponent,
     CountryListHeaderComponent,
     CountryItemComponent,
-    PaginationComponent
+    PaginationComponent,
+    PopUpCountryItemComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     FormsModule,
     MatInputModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [SharedDataService],
   bootstrap: [AppComponent]

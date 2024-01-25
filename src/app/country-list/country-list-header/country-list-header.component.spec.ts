@@ -1,13 +1,14 @@
 import { SharedDataService } from 'src/app/shared-data.service';
 import { Router } from '@angular/router';
 import { CountryListHeaderComponent } from './country-list-header.component';
+import { MatDialog } from '@angular/material/dialog';
 
 describe('country-list-header', () => {
   let component: CountryListHeaderComponent;
   let sharedDataService: SharedDataService;
 
   beforeEach(() => {
-    sharedDataService = new SharedDataService({} as Router, {} as any);
+    sharedDataService = new SharedDataService({} as Router, {} as any, {} as MatDialog);
     component = new CountryListHeaderComponent(sharedDataService);
 
     // Other setup if needed
