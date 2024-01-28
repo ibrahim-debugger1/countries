@@ -13,12 +13,12 @@ export class PopUpCountryItemComponent implements OnInit, OnDestroy {
   item!: Country;
   mode!: boolean;
 
-  constructor(private sharedDataService: SharedDataService) {}
+  constructor(public sharedDataService: SharedDataService) {}
   ngOnInit() {
     this.dataSubscription = this.sharedDataService.data$.subscribe(
-      ({ data, mode }) => {
-        this.item = data;
-        this.mode = mode;
+      (test: { data: Country; mode: boolean; }) => {
+        this.item = test.data;
+        this.mode = test.mode;
       }
     );
   }

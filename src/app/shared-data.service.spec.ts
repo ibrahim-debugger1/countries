@@ -6,6 +6,9 @@ import { PaginationComponent } from './country-list/pagination/pagination.compon
 import { CountryListComponent } from './country-list/country-list.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { mockSharedDataService } from './shared-data.service.mock';
+import { PopUpCountryItemComponent } from './country-list/country-item/pop-up-country-item/pop-up-country-item.component';
+import { of as observableOf } from 'rxjs';
 
 describe('SharedDataService', () => {
   let service: SharedDataService;
@@ -294,13 +297,27 @@ describe('SharedDataService', () => {
   });
 
   describe('onPopUp', () => {
+    let service1 = SharedDataService;
     let dialogSpy: jasmine.SpyObj<MatDialog>;
-
     beforeEach(() => {
       dialogSpy = jasmine.createSpyObj('MatDialog', ['open']);
+      service = new SharedDataService(
+        {} as Router,
+        httpClientSpy as any,
+        dialogSpy as MatDialog
+      );
     });
     it('should open the dialog and emit data', () => {
-      //i tried to test it but i can't
+      const spyDataSubjectNext = spyOn(service.dataSubject, 'next');
+
+      // Call the openPopup function with the mock data and mode
+      service.openPopup(mockData[0], false);
+
+      // Check if dataSubject.next was called with the expected values
+      expect(spyDataSubjectNext).toHaveBeenCalledWith({
+        data: mockData[0],
+        mode: false,
+      });
     });
   });
 });

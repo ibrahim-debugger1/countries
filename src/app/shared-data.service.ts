@@ -28,10 +28,10 @@ export class SharedDataService {
     data: Country;
     mode: boolean;
   }>({
-    data: this.slicedCountryData[0], // Replace with your default data
-    mode: false, // Replace with your default mode value
+    data: this.slicedCountryData[0],
+    mode: false,
   });
-  data$ = this.dataSubject.asObservable();
+ data$: any = this.dataSubject.asObservable();
 
   constructor(
     public router: Router,
